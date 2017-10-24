@@ -8,22 +8,25 @@ import pandas as pd
 #       masterSink: destination folder containing
 #                   all sink materials
 
-def expand_sink(newSink) :
+def expand_sink(newSink, masterSink) :
 
+    # open new sink csv and extract InChi columns
     dataFrame = pd.read_csv(newSink)
     inchiSubstrates = dataFrame['Substrate InChI']
     inchiProducts = dataFrame['Product InChI']
 
-    inchis = inchiSubstrates.append(inchiProducts)
+    # combine InChis into one column
+    inchisSeries = inchiSubstrates.append(inchiProducts)
 
-    for row in inchis :
-        print(row)
-    
-#    newFiles = os.listdir(newSink)
+    # convert to dataframe for appending to master sink
+    inchis = inchisSeries.to_frame()
 
-#    for f in newFiles:
-#        shutil.move(newSink + f, masterSink)
+    # append to master sink
+    inchis.insert(0, '', '')
+    with open('masterSink.csv', 'a') as f:
+        inchis.to_csv(f, index=False)
+
 
 fileName = '../RetroPath2.0/tutorial_data/naringenin/res_B/results.csv'
-
-expand_sink(fileName)
+oldSink = './masterSink.csv'
+expand_sink(fileName, oldSink)
