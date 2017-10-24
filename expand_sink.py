@@ -14,9 +14,9 @@ def expand_sink(newSink) :
     inchiSubstrates = dataFrame['Substrate InChI']
     inchiProducts = dataFrame['Product InChI']
 
-    print("hello")
+    inchis = inchiSubstrates.append(inchiProducts)
 
-    for row in dataFrame :
+    for row in inchis :
         print(row)
     
 #    newFiles = os.listdir(newSink)
@@ -24,6 +24,6 @@ def expand_sink(newSink) :
 #    for f in newFiles:
 #        shutil.move(newSink + f, masterSink)
 
-fileName = '../RetroPath2.0/tutorial_data/violacein/res/results.csv'
+fileName = '../RetroPath2.0/tutorial_data/naringenin/res_B/results.csv'
 
 expand_sink(fileName)
