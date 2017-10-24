@@ -1,5 +1,4 @@
-import shutil
-import os
+import sys
 import pandas as pd
 
 # add generated contents to existing sink materials
@@ -27,6 +26,13 @@ def expand_sink(newSink, masterSink) :
         inchis.to_csv(f, index=False)
 
 
-fileName = '../RetroPath2.0/tutorial_data/naringenin/res_B/results.csv'
-oldSink = './masterSink.csv'
-expand_sink(fileName, oldSink)
+#fileName = '../RetroPath2.0/tutorial_data/naringenin/res_B/results.csv'
+#oldSink = './masterSink.csv'
+if (len(sys.argv) > 3) :
+    print("Error: Too many arguments:\n")
+    print("Please provide only a newSink and a masterSink")
+    sys.exit(1)
+
+newSink = sys.argv[1]
+masterSink = sys.argv[2]
+expand_sink(newSink, masterSink)
