@@ -2,9 +2,9 @@ import sys
 import pandas as pd
 
 # add generated contents to existing sink materials
-# @pre:    newSink: newly-generated directory
+# @pre:    newSink: newly-generated results file
 #                   from which to move contents
-#       masterSink: destination folder containing
+#       masterSink: destination file containing
 #                   all sink materials
 
 def expand_sink(newSink, masterSink) :
@@ -22,12 +22,10 @@ def expand_sink(newSink, masterSink) :
 
     # append to master sink
     inchis.insert(0, '', '')
-    with open('masterSink.csv', 'a') as f:
+    with open(masterSink, 'a') as f:
         inchis.to_csv(f, index=False)
 
 
-#fileName = '../RetroPath2.0/tutorial_data/naringenin/res_B/results.csv'
-#oldSink = './masterSink.csv'
 if (len(sys.argv) > 3) :
     print("Error: Too many arguments:\n")
     print("Please provide only a newSink and a masterSink")
